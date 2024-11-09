@@ -2,18 +2,24 @@ package com.di;
 
 import java.util.List;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 public class Main {
     public static void main(String[] args) {
-        // Створення залежностей
-        ContentManagementSystem cms = new ContentManagementSystem();
-        RecommendationEngine recommendationEngine = new RecommendationEngine();
+        // Створення модуля для Guice
+        Injector injector = Guice.createInjector(new AppModule());
 
-        // Впровадження залежностей через конструктор
-        Producer producer = new Producer(cms);
+        // Отримання об'єктів через Guice
+        Producer producer = injector.getInstance(Producer.class);
         producer.setUsername("Producer1");
 
-        Viewer viewer = new Viewer(recommendationEngine);
+        Viewer viewer = injector.getInstance(Viewer.class);
         viewer.setUsername("Viewer1");
+
+        // Впровадження залежностей через метод setter
+        producer.setContentManagementSystem(injector.getInstance(ContentManagementSystem.class));
+        viewer.setRecommendationEngine(injector.getInstance(RecommendationEngine.class));
 
         Video video = new Video();
         video.setTitle("My First Video");

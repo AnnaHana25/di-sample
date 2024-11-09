@@ -2,11 +2,25 @@ package com.di;
 
 import java.util.List;
 
-public class Viewer extends User {
-    private final RecommendationEngine recommendationEngine;
+import com.google.inject.Inject;
 
-    // Впровадження залежності через конструктор
-    public Viewer(RecommendationEngine recommendationEngine) {
+public class Viewer extends User {
+    private RecommendationEngine recommendationEngine;
+
+    // Закоментуваний конструктор
+    // public Viewer(RecommendationEngine recommendationEngine) {
+    //     this.recommendationEngine = recommendationEngine;
+    // }
+
+    // Закоментуваний конструктор впроваджений через Guice
+    // @Inject
+    // public Viewer(RecommendationEngine recommendationEngine) {
+    //     this.recommendationEngine = recommendationEngine;
+    // }
+
+    // Доданий setter для впровадження залежності
+    @Inject
+    public void setRecommendationEngine(RecommendationEngine recommendationEngine) {
         this.recommendationEngine = recommendationEngine;
     }
 

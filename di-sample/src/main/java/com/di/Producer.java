@@ -1,10 +1,24 @@
 package com.di;
 
-public class Producer extends User {
-    private final ContentManagementSystem cms;
+import com.google.inject.Inject;
 
-    // Впровадження залежності через конструктор
-    public Producer(ContentManagementSystem cms) {
+public class Producer extends User {
+    private ContentManagementSystem cms;
+
+    // Закоментуваний конструктор
+    // public Producer(ContentManagementSystem cms) {
+    //     this.cms = cms;
+    // }
+
+    // Закоментуваний конструктор впроваджений через Guice
+    // @Inject
+    // public Producer(ContentManagementSystem cms) {
+    //     this.cms = cms;
+    // }
+
+    // Доданий setter для впровадження залежності
+    @Inject
+    public void setContentManagementSystem(ContentManagementSystem cms) {
         this.cms = cms;
     }
 
