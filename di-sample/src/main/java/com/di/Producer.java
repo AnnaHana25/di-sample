@@ -22,6 +22,16 @@ public class Producer extends User {
         this.cms = cms;
     }
 
+    private PaymentService paymentService;
+    
+    
+    @Inject
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+    public void paycheck(Paycheck paycheck) {
+        paymentService.savePaycheck(paycheck);
+    }
     @Override
     public void displayInfo() {
         System.out.println("Producer: " + username);
